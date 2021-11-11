@@ -1,4 +1,4 @@
-const { useCallback, useEffect, useMemo, useRef, useState } = require('react');
+const { useCallback, useEffect, useMemo, useRef, useState, createElement } = require('react');
 const styled = require('styled-components');
 
 const Root = styled.div`
@@ -253,27 +253,34 @@ exports.default = function ScrollCarousel({
     });
 
   // render
-  
-  return (
-    <Root
-      {...props}
-      style={{
+
+  return createElement(
+    Root,{
+      ...props,
+      style: {
         ...style,
         height: preferedRootHeight,
-      }}
-    >
-      <ScrollElement
-        ref={scrollElement}       
-        style={{
+      }
+    },createElement(
+      ScrollElement,{
+        ref:  scrollElement,
+        style: {
           scrollSnapType: snap && _snap ? 'x mandatory' : 'none',
-        }}
-      >
-        <Wrapper style={{marginRight: `${extraMargin}px`}}>
-          <TrackElement as={track} $align={align}>
-            {children}
-          </TrackElement>
-        </Wrapper>
-      </ScrollElement>
-    </Root>
+        }
+      },
+      createElement(
+        Wrapper,{
+          style: {
+            marginRight: `${extraMargin}px`
+          }
+        },createElement(
+          TrackElement,{
+            as: track,
+            $align: align,
+          },
+          children
+        )
+      )
+    )
   );
 };
