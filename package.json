@@ -6,5 +6,9 @@
   "repository": "https://github.com/mateusrachid/react-scroll-carousel",
   "author": "Mateus Rachid <mateus_rachid@outlook.com>",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "peerDependencies": {
+    "react": "^17.0.2",
+    "styled-components": "^5.3.3"
+  }
 }
